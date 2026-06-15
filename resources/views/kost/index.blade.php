@@ -3,7 +3,7 @@
         {{ $title }}
         </x-slot>
 
-        <table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped text-center">
 
             <thead>
                 <tr>
@@ -29,6 +29,11 @@
                     <td>{{ $kost->status }}</td>
                     <td>
                         <a href="{{ route('kost.edit', $kost->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ route('kost.destroy', $kost->id) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('Anda Yakin?')">Hapus</button>
+                        </form>
                     </td>
                 </tr>
                 @empty

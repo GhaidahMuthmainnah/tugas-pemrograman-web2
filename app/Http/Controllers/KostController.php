@@ -80,16 +80,16 @@ class KostController extends Controller
 
         $kost->update($validated);
 
-        return redirect()
-            ->route('kost.index')
-            ->with(
-                'success',
-                'Data kost berhasil diubah.'
-            );
+        return redirect()->route('kost.index')->with('success', 'Data kost berhasil diubah.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(kost $kost) {}
+    public function destroy(kost $kost)
+    {
+        $kost->delete();
+
+        return redirect()->route('kost.index')->with('success', 'Data kost berhasil dihapus.');
+    }
 }
