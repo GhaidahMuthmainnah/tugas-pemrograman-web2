@@ -22,12 +22,31 @@ class KostController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function create()
+    {
+        return view('kost.create', [
+            'title' => 'Tambah Data Kost',
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'nama_kost' => 'required',
+            'pemilik' => 'required',
+            'alamat' => 'required',
+            'harga_per_bulan' => 'required|numeric',
+            'jumlah_kamar' => 'required|numeric',
+            'status' => 'required',
+        ]);
+
+        Kost::create($validated);
+
+        return redirect()->route('kost.index')->with('success', 'Data kost berhasil ditambahkan.');
+    }
 
     /**
      * Display the specified resource.
