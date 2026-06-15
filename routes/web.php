@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KostController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/kost');
+Route::resource('kost', KostController::class);
