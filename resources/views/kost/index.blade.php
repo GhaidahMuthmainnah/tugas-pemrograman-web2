@@ -27,7 +27,9 @@
                     <td>Rp {{ number_format($kost->harga_per_bulan) }}</td>
                     <td>{{ $kost->jumlah_kamar }}</td>
                     <td>{{ $kost->status }}</td>
-                    <td>-</td>
+                    <td>
+                        <a href="{{ route('kost.edit', $kost->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    </td>
                 </tr>
                 @empty
                 <tr>

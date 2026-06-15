@@ -51,20 +51,45 @@ class KostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(kost $product) {}
+    public function show(kost $kost) {}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(kost $product) {}
+    public function edit(kost $kost)
+    {
+        return view('kost.edit', [
+            'title' => 'Edit Data Kost',
+            'kost' => $kost,
+        ]);
+    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, kost $product) {}
+    public function update(Request $request, kost $kost)
+    {
+        $validated = $request->validate([
+            'nama_kost' => 'required',
+            'pemilik' => 'required',
+            'alamat' => 'required',
+            'harga_per_bulan' => 'required|numeric',
+            'jumlah_kamar' => 'required|numeric',
+            'status' => 'required',
+        ]);
+
+        $kost->update($validated);
+
+        return redirect()
+            ->route('kost.index')
+            ->with(
+                'success',
+                'Data kost berhasil diubah.'
+            );
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(kost $product) {}
+    public function destroy(kost $kost) {}
 }
